@@ -724,6 +724,39 @@ require('lazy').setup({
             require('lspconfig')[server_name].setup(server)
           end,
         },
+        require('mason').setup(),
+        require('mason-lspconfig').setup {
+          ensure_installed = { 'emmet_language_server' },
+          automatic_installation = true,
+        },
+        --require('lspconfig').emmet_ls.setup {
+        -- use emmet-lang... vs emmet-ls
+        --require('lspconfig').emmet_language_server.setup {
+        --capabilities = vim.lsp.protocol.make_client_capabilities(),
+        --filetypes = { 'css', 'html', 'javascript', 'javascriptreact', 'less', 'sass', 'scss', 'svelte', 'pug', 'typescriptreact', 'vue' },
+        --init_options = {
+        --html = {
+        --options = {
+        --['bem.enabled'] = true,
+        --},
+        --},
+        --},
+        --},
+        -- remove above commented if this works!!!
+        require('lspconfig').emmet_language_server.setup {
+          filetypes = { 'css', 'eruby', 'html', 'javascript', 'javascriptreact', 'less', 'sass', 'scss', 'pug', 'typescriptreact' },
+          init_options = {
+            includeLanguages = {},
+            excludeLanguages = {},
+            extensionsPath = {},
+            preferences = {},
+            showAbbreviationSuggestions = true,
+            showExpandedAbbreviation = 'always',
+            showSuggestionsAsSnippets = false,
+            syntaxProfiles = {},
+            variables = {},
+          },
+        },
       }
     end,
   },
@@ -947,6 +980,10 @@ require('lazy').setup({
         additional_vim_regex_highlighting = { 'ruby' },
       },
       indent = { enable = true, disable = { 'ruby' } },
+      -- Defaults
+      enable_close = true, -- Auto close tags
+      enable_rename = true, -- Auto rename pairs of tags
+      enable_close_on_slash = false, -- Auto close on trailing
     },
     -- There are additional nvim-treesitter modules that you can use to interact
     -- with nvim-treesitter. You should go explore a few and see what interests you:
@@ -965,10 +1002,10 @@ require('lazy').setup({
   --  Here are some example plugins that I've included in the Kickstart repository.
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
-  -- require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.debug',
   -- require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
-  -- require 'kickstart.plugins.autopairs',
+  require 'kickstart.plugins.autopairs',
   -- require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
