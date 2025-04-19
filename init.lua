@@ -200,6 +200,9 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
 
+-- Save file via 'zz' in normal mode
+vim.keymap.set('n', 'zz', ':update<CR>zz')
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -409,6 +412,32 @@ require('lazy').setup({
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
           },
+        },
+        {
+          'windwp/nvim-autopairs',
+          event = 'InsertEnter',
+          config = true,
+          -- use opts = {} for passing setup options
+          opts = {},
+          -- this is equivalent to setup({}) function
+        },
+        {
+          -- require('nvim-ts-autotag').setup {
+          -- opts = {
+          -- Defaults
+          -- enable_close = true, -- Auto close tags
+          -- enable_rename = true, -- Auto rename pairs of tags
+          -- enable_close_on_slash = false, -- Auto close on trailing </
+          -- },
+          -- Also override individual filetype configs, these take priority.
+          -- Empty by default, useful if one of the "opts" global settings
+          -- doesn't work well in a specific filetype
+          -- per_filetype = {
+          -- ['html'] = {
+          -- enable_close = false,
+          -- },
+          -- },
+          -- },
         },
       }
 
@@ -980,10 +1009,6 @@ require('lazy').setup({
         additional_vim_regex_highlighting = { 'ruby' },
       },
       indent = { enable = true, disable = { 'ruby' } },
-      -- Defaults
-      enable_close = true, -- Auto close tags
-      enable_rename = true, -- Auto rename pairs of tags
-      enable_close_on_slash = false, -- Auto close on trailing
     },
     -- There are additional nvim-treesitter modules that you can use to interact
     -- with nvim-treesitter. You should go explore a few and see what interests you:
